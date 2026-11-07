@@ -4,7 +4,6 @@ from pathlib import Path
 
 from decouple import Config, RepositoryEnv
 
-
 BASE_DIR = Path(__file__).resolve().parent
 
 env = Config(

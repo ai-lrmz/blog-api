@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path
-from apps.auths.views import RegisterView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+
+from apps.auths.views import RegisterView
 from apps.blog.views import (
     CategoryListCreateView,
     CommentDetailView,

@@ -1,0 +1,81 @@
+{% extends "unfold/layouts/base.html" %}
+{% load unfold %}
+
+{% block content %}
+
+<div class="mb-8">
+    <h1 class="text-3xl font-bold">
+        Blog Dashboard
+    </h1>
+    <p class="mt-2 text-gray-500 dark:text-gray-400">
+        Blog API statistics and overview
+    </p>
+</div>
+
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 gap-4 mb-8 md:grid-cols-2 xl:grid-cols-4">
+
+    {% component "unfold/components/card.html" with title="Total Users" %}
+        <div class="text-3xl font-bold">
+            {{ total_users }}
+        </div>
+    {% endcomponent %}
+
+    {% component "unfold/components/card.html" with title="Published Posts" %}
+        <div class="text-3xl font-bold text-green-500">
+            {{ published_count }}
+        </div>
+    {% endcomponent %}
+
+    {% component "unfold/components/card.html" with title="Draft Posts" %}
+        <div class="text-3xl font-bold text-orange-500">
+            {{ draft_count }}
+        </div>
+    {% endcomponent %}
+
+    {% component "unfold/components/card.html" with title="Comments" %}
+        <div class="text-3xl font-bold">
+            {{ comments_count }}
+        </div>
+    {% endcomponent %}
+
+</div>
+
+<!-- Posts by Category -->
+<div class="mb-8">
+    {% component "unfold/components/card.html" with title="Posts by Category" %}
+        {% component "unfold/components/chart/bar.html" with data=posts_chart %}
+        {% endcomponent %}
+    {% endcomponent %}
+</div>
+
+<!-- Top 5 Authors -->
+<div class="mb-8">
+    {% component "unfold/components/card.html" with title="Top 5 Authors" %}
+        {% component "unfold/components/table.html" with table=authors_table card_included=1 %}
+        {% endcomponent %}
+    {% endcomponent %}
+</div>
+
+<!-- Publication Progress -->
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+
+    {% component "unfold/components/card.html" with title="Published Posts" %}
+        {% component "unfold/components/progress.html" with title="Published" value=published_percent description="Published posts" %}
+        {% endcomponent %}
+        <p class="mt-3 text-sm">
+            {{ published_percent }}%
+        </p>
+    {% endcomponent %}
+
+    {% component "unfold/components/card.html" with title="Draft Posts" %}
+        {% component "unfold/components/progress.html" with title="Drafts" value=draft_percent description="Draft posts" %}
+        {% endcomponent %}
+        <p class="mt-3 text-sm">
+            {{ draft_percent }}%
+        </p>
+    {% endcomponent %}
+
+</div>
+
+{% endblock %}
