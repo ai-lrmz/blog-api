@@ -18,3 +18,5 @@ Thumbs.db
 
 db_backup.sqlite3
 .env.*
+
+db_test.sqlite3

@@ -1,10 +1,16 @@
 from django import forms
 from django.contrib import admin, messages
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.admin import (
+    GroupAdmin as BaseGroupAdmin,
+)
+from django.contrib.auth.admin import (
+    UserAdmin as BaseUserAdmin,
+)
 from django.contrib.auth.forms import (
     AdminPasswordChangeForm,
     UserChangeForm,
 )
+from django.contrib.auth.models import Group
 from django.db.models import Count
 from unfold.admin import ModelAdmin
 from unfold.contrib.filters.admin import BooleanRadioFilter
@@ -228,3 +234,10 @@ is_active,
             f"{updated} users deactivated successfully.",
             messages.SUCCESS,
         )
+        
+admin.site.unregister(Group)
+
+
+@admin.register(Group)
+class GroupAdmin(BaseGroupAdmin, ModelAdmin):
+    pass
